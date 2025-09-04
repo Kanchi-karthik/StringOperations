@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Name String Operations</title>
+</head>
+<body>
+  <h2>JavaScript Name String Operations</h2>
+
+  <label>Enter your name: </label>
+  <input type="text" id="userName" placeholder="Type your name here">
+  <button onclick="stringOps()">Run Operations</button>
+
+  <pre id="output"></pre>
+
+  <script>
+    function stringOps() {
+      let str = document.getElementById("userName").value.trim();
+
+      if (!str) {
+        alert("Please enter a name!");
+        return;
+      }
+
+      // Reverse
+      let reversed = str.split("").reverse().join("");
+
+      // Capitalize (first letter uppercase, rest same)
+      let capitalized = str.charAt(0).toUpperCase() + str.slice(1);
+
+      // Array of characters
+      let arrayChars = str.split("").join(",");
+
+      // Split into words
+      let splitWords = str.split(" ").join(", ");
+
+      // Includes vowels check
+      let vowels = ["a", "e", "i", "o", "u"];
+      let hasVowel = str.toLowerCase().split("").some(ch => vowels.includes(ch));
+
+      // Check start type (number/word/other)
+      let startsWithType = /^[0-9]/.test(str) ? "Number" : /^[A-Za-z]/.test(str) ? "Word (Letter)" : "Other";
+
+      // Check end type (number/word/other)
+      let endsWithType = /[0-9]$/.test(str) ? "Number" : /[A-Za-z]$/.test(str) ? "Word (Letter)" : "Other";
+
+      // Ask user to add/concat another name
+      let extraName = prompt("Do you want to add another name? If yes, type it. If no, leave empty:", "");
+      let concatResult = extraName ? str.concat(" " + extraName) : "No extra name added.";
+
+      // Show output
+      document.getElementById("output").textContent =
+        "Original: " + str + "\n\n" +
+        "Reversed: " + reversed + "\n\n" +
+        "Capitalized: " + capitalized + "\n\n" +
+        "Array: " + arrayChars + "\n\n" +
+        "Split (words): " + splitWords + "\n\n" +
+        "Includes vowel: " + hasVowel + "\n\n" +
+        "Starts with: " + startsWithType + "\n\n" +
+        "Ends with: " + endsWithType + "\n\n" +
+        "Concat result: " + concatResult;
+    }
+  </script>
+</body>
+</html>
